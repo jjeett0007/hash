@@ -12,8 +12,11 @@ function generateHexRange(range, searchAddress) {
 
     worker.on("message", (result) => {
       if (result.found) {
+        console.log("Found address:", result.data);
         resolve(result.data);
         worker.terminate();
+      } else if (result.progress !== undefined) {
+        console.log(`Progress: ${result.progress.toFixed(2)}%`);
       }
     });
 
@@ -33,8 +36,8 @@ function generateHexRange(range, searchAddress) {
 }
 
 (async () => {
-  const range = "10000:1ffff";
-  const searchAddress = "1E6NuFjCi27W5zoXg8TRdcSRq84zJeBW3k";
+  const range = "20000000000000000:20000000000100000";
+  const searchAddress = "13zb1hQbWVsc2S7ZTZnP2G4undNNpdh5so";
   try {
     const result = await generateHexRange(range, searchAddress);
     console.log(result);
