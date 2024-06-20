@@ -1,5 +1,8 @@
 const { Worker } = require("worker_threads");
 const path = require("path");
+const os = require("os");
+
+const numCPUs = os.cpus().length;
 
 function generateHexRange(range, searchAddress) {
   return new Promise((resolve, reject) => {
@@ -12,7 +15,7 @@ function generateHexRange(range, searchAddress) {
 
     worker.on("message", (result) => {
       if (result.found) {
-        console.log("Found address:", result.data);
+        // console.log("Found address:", result.data);
         resolve(result.data);
         worker.terminate();
       } else if (result.progress !== undefined) {
@@ -35,9 +38,10 @@ function generateHexRange(range, searchAddress) {
   });
 }
 
+
 (async () => {
-  const range = "20000000003100000:20000000005100000";
-  const searchAddress = "13zb1hQbWVsc2S7ZTZnP2G4undNNpdh5so";
+  const range = "1:10000";
+  const searchAddress = "1QCbW9HWnwQWiQqVo5exhAnmfqKRrCRsvW";
   try {
     const result = await generateHexRange(range, searchAddress);
     console.log(result);
