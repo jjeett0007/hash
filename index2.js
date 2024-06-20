@@ -36,7 +36,7 @@ function generateHexRange(range, searchAddress) {
 }
 
 (async () => {
-  const range = "20000000000000000:20000000000100000";
+  const range = "20000000003100000:20000000005100000";
   const searchAddress = "13zb1hQbWVsc2S7ZTZnP2G4undNNpdh5so";
   try {
     const result = await generateHexRange(range, searchAddress);
